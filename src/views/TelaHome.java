@@ -3,82 +3,48 @@ package views;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
-import email.Mensageiro;
 import imagens.Imagens;
-import persistencia.CentralDeInformacoes;
-import persistencia.Persistencia;
-import relatorios.GeradorDeRelatorios;
 import utils.JButtonPadrao;
 import utils.JFramePadrao;
 import utils.JLabelPadraoTitulo;
+import views.Canal.TelaCanal;
+import views.Programa.TelaPrograma;
 
-public class TelaHome extends JFramePadrao {
+public class TelaHome extends JFramePadrao{
+    
 
-	Persistencia persistencia = new Persistencia();
+    private JButtonPadrao btnCanais;
+    private JButtonPadrao btnProgramas;
+    private JButtonPadrao btnRelatorios;
+    
 
-	CentralDeInformacoes central = persistencia.recuperarCentral("database.xml");
 
-	public TelaHome() {
-		super("mySeries - Inicio", 400, 400);
-		adicionarMenuBar();
-		adicionarLabels();
-		adicionarImagens();
-		adicionarButtons();
-		setVisible(true);
-	}
-	
-	
-	
+    public TelaHome(){
+        super("mySeries - Inicio", 500, 200);
+        adicionarLabels();
+        adicionarButtons();
+        adicionarSeparador();
+        setVisible(true);
+    }
 
-	private void adicionarMenuBar() {
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
 
-		JMenu menu = new JMenu("Opções");
-		menuBar.add(menu);
+    private void adicionarLabels(){
+        JLabel lblLogo = new JLabel(Imagens.LOGO_MY_SERIES_250x250);
+        lblLogo.setBounds(0, 10, 110, 130);
 
-		JMenuItem itemSair = new JMenuItem("Sair");
-		itemSair.addActionListener(new ActionListener() {
+        JLabelPadraoTitulo lblTitulo = new JLabelPadraoTitulo("Bem-vindo ao mySeries", 180, 20, 230, 28);
 
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new TelaLogin();
+        add(lblLogo);
+        add(lblTitulo);
+    }
 
-			}
-		});
-		
-		JMenuItem itemSobre = new JMenuItem("Sobre");
-		itemSobre.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new TelaSobre();
-				
-			}
-		}); 
-		
-		
-		menu.add(itemSobre);
-		menu.add(itemSair);
-	}
-
-	private void adicionarLabels() {
-		JLabel lblUsuario = new JLabelPadraoTitulo("Seja bem-vindo ao mySeries.", 50, 10, 300, 100);
-	
-		add(lblUsuario);
-
-	}
-
-	private void adicionarButtons() {
-		JButton btnCanais = new JButtonPadrao("Canais", 150, 120, 90, 50);
-
-		btnCanais.addActionListener(new ActionListener() {
+    private void adicionarButtons(){
+        btnCanais = new JButtonPadrao("Canais", 130, 70, 90, 50);
+        btnCanais.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -87,9 +53,9 @@ public class TelaHome extends JFramePadrao {
 			}
 		});
 		add(btnCanais);
-
-		JButton btnProgramas = new JButtonPadrao("Programas", 150, 200, 90, 50);
-		btnProgramas.addActionListener(new ActionListener() {
+        
+        btnProgramas = new JButtonPadrao("Programas", 250, 70, 100, 50);
+        btnProgramas.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -97,29 +63,21 @@ public class TelaHome extends JFramePadrao {
 
 			}
 		});
-		add(btnProgramas);
+        
+        btnRelatorios = new JButtonPadrao("Relatorios", 380, 70, 90, 50);
+        add(btnCanais);
 
-		JButton btnRelatorio = new JButtonPadrao("Relatórios", 150, 290, 90, 50);
-		btnRelatorio.addActionListener(new ActionListener() {
+        add(btnProgramas);
+        add(btnRelatorios);
+    }
 
-			public void actionPerformed(ActionEvent e) {
-				try {
-					GeradorDeRelatorios.gerarProgramacaoDeHoje(central);
-					Mensageiro.enviarProgramacaoDeHoje("marcello.razer@gmail.com");
-				} catch (Exception e1) {
+    private void adicionarSeparador(){
+        JSeparator separador = new JSeparator(SwingConstants.VERTICAL);
+        separador.setBounds(110, 0, 10, 160);
+        add(separador);
+    }
 
-					e1.printStackTrace();
-				}
 
-			}
-		});
-		add(btnRelatorio);
-	}
-
-	private void adicionarImagens() {
-		JLabel lblLogo = new JLabel(Imagens.NOVO_USER_100x100);
-		add(lblLogo);
-	}
-
+    
 
 }

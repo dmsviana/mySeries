@@ -1,10 +1,20 @@
 package classes;
 
-public abstract class Canal {
+import java.util.ArrayList;
+
+public class Canal {
 	
 	private String nomeDoCanal;
-	private String tipoDoCanal;
+	private long id;
+	private ArrayList<ProgramaDeTV> programasCadastrados = new ArrayList<ProgramaDeTV>();
 	
+	
+
+	
+	public Canal(String nomeDoCanal){
+		this.nomeDoCanal = nomeDoCanal;
+		this.id = System.currentTimeMillis();
+	}
 
 	public String getNomeDoCanal() {
 		return nomeDoCanal;
@@ -12,12 +22,16 @@ public abstract class Canal {
 	public void setNomeDoCanal(String nomeDoCanal) {
 		this.nomeDoCanal = nomeDoCanal;
 	}
-	public String getTipoDoCanal() {
-		return tipoDoCanal;
+	
+	public ArrayList<ProgramaDeTV> getProgramasCadastrados() {
+		return programasCadastrados;
 	}
-	public void setTipoDoCanal(String tipoDoCanal) {
-		this.tipoDoCanal = tipoDoCanal;
+
+	public void setProgramasCadastrados(ArrayList<ProgramaDeTV> programasCadastrados) {
+		this.programasCadastrados = programasCadastrados;
 	}
+
+
 	
 	public String toString() {
 		return "\nNome do canal: " + nomeDoCanal;
@@ -31,5 +45,10 @@ public abstract class Canal {
 		}
 		}
 		return false;
+	}
+
+	public long getId() {
+		
+		return id;
 	}
 }

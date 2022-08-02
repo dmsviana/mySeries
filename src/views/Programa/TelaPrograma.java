@@ -1,4 +1,5 @@
-package views;
+package views.Programa;
+
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,68 +11,70 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-import classes.Usuario;
 import imagens.Imagens;
 import persistencia.CentralDeInformacoes;
 import persistencia.Persistencia;
 import utils.JButtonPadrao;
 import utils.JFramePadrao;
 import utils.JLabelPadrao;
+import views.TelaHome;
 
-public class TelaCanal extends JFramePadrao{
+public class TelaPrograma extends JFramePadrao {
+
+	public TelaPrograma() {
+		super("mySeries - Programas", 360, 180);
+		adicionarImagens();
+		adicionarLabels();
+		adicionarButtons();
+		adicionarSeparador();
+		setVisible(true);
 		
-	public TelaCanal() {
-			super("mySeries - Canais", 360, 180);
-			adicionarImagens();
-			adicionarLabels();
-			adicionarButtons();
-			adicionarSeparador();
-			setVisible(true);
-		}
+	}
+	
 	
 	private void adicionarImagens() {
-		JLabel iconeCanal = new JLabel(Imagens.CANAL_100x100);
-		iconeCanal.setBounds(10, 0, 100, 100);
-		add(iconeCanal);
+		JLabel iconePrograma = new JLabel(Imagens.ICONE_PROGRAMA);
+		iconePrograma.setBounds(20, 20, 64, 64);
+		add(iconePrograma);
 	}
 	
 	private void adicionarLabels() {
-		JLabel lblCanal = new JLabelPadrao("Canais", 30, 80, 60, 50);
-		add(lblCanal);
+		JLabel lblPrograma = new JLabelPadrao("Programas", 10, 75, 90, 50);
+		add(lblPrograma);
 	}
 	
 	private void adicionarButtons() {
-		JButton btnCadastrarCanal = new JButtonPadrao("Cadastrar Canal", 125, 15, 200, 30);
-		btnCadastrarCanal.addActionListener(new ActionListener() {
+		JButton btnCadastrarPrograma = new JButtonPadrao("Cadastrar programa", 125, 15, 200, 30);
+		btnCadastrarPrograma.addActionListener(new ActionListener() {
 			
 			
 			public void actionPerformed(ActionEvent e) {
+				new TelaCadastroPrograma();
 				dispose();
-				new TelaCadastroCanal();
 				
 			}
 		});
-		add(btnCadastrarCanal);
+		add(btnCadastrarPrograma);
 		
-		JButton btnListarCanais = new JButtonPadrao("Exibir Canais", 125, 55, 200, 30);
-		btnListarCanais.addActionListener(new ActionListener() {
+		JButton btnListarProgramas = new JButtonPadrao("Exibir Programas", 125, 55, 200, 30);
+		btnListarProgramas.addActionListener(new ActionListener() {
 			
 			
 			public void actionPerformed(ActionEvent e) {
 				Persistencia persistencia = new Persistencia();
 				CentralDeInformacoes central = persistencia.recuperarCentral("database.xml");
 				
-				if(central.getTodosOsCanais().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Oops! Parece que a lista de canais está vazia!", "Aviso!", JOptionPane.WARNING_MESSAGE);
+				if(central.getTodosOsProgramas().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Oops! Parece que a lista de programas está vazia!", "Aviso!", JOptionPane.WARNING_MESSAGE);
 					
 				} else {
 					dispose();
-					new TelaListarCanais();
+					new TelaListarProgramas();
 				}
 				
 			}
 		});
-		add(btnListarCanais);
+		add(btnListarProgramas);
 		
 		JButton btnVoltar = new JButtonPadrao("Voltar", 125, 95, 200, 30);
 		btnVoltar.addActionListener(new ActionListener() {
@@ -92,4 +95,8 @@ public class TelaCanal extends JFramePadrao{
 		separador.setForeground(Color.GRAY);
 		add(separador);
 	}
+	
+	
+
 }
+

@@ -4,7 +4,8 @@ public class CanalTVAberta extends Canal {
 	
 	private int numeroDoCanal;
 	
-	public CanalTVAberta(int numeroDoCanal) {
+	public CanalTVAberta(int numeroDoCanal, String nomeDoCanal) {
+		super(nomeDoCanal);
 		this.numeroDoCanal = numeroDoCanal;
 	}
 
@@ -18,7 +19,7 @@ public class CanalTVAberta extends Canal {
 	
 	public String toString() {
 		return "Nome do canal: " + getNomeDoCanal()
-			   +"Número do canal: " + numeroDoCanal;
+			   +"Numero do canal: " + numeroDoCanal;
 	}
 	
 	

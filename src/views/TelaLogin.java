@@ -1,154 +1,122 @@
 package views;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 import classes.Usuario;
-import icone.Icone;
 import imagens.Imagens;
 import persistencia.CentralDeInformacoes;
 import persistencia.Persistencia;
 import utils.JButtonPadrao;
 import utils.JFramePadrao;
 import utils.JLabelPadrao;
+import utils.JLabelPadraoTitulo;
 import utils.JTextFieldPadrao;
 
-public class TelaLogin extends JFramePadrao {
-
-	Persistencia persistencia = new Persistencia();
-	CentralDeInformacoes central = null;
-
-	// Atributos
-	private JTextFieldPadrao txtLogin;
-	private JPasswordField txtSenha;
+public class TelaLogin extends JFramePadrao{
 	
+	Persistencia persistencia = new Persistencia();
+	CentralDeInformacoes central = persistencia.recuperarCentral("database.xml");
 
-	// Construtor
-	public TelaLogin() {
-		super("Login - mySeries", 410, 490);
-		adicionarImagens();
-		adicionarLabels();
-		adicionarInputs();
-		adicionarButtons();
-		setVisible(true);
-	}
+    private JTextFieldPadrao txtEmail;
+    private JPasswordField txtSenha;
+    private JButtonPadrao btnEntrar;
+    private JButtonPadrao btnCriarConta;
+    private JSeparator separador;
+    
 
-	// Componentes
-	private void adicionarImagens() {
-		JLabel lblLogoProjeto = new JLabel(Imagens.LOGO_MY_SERIES_250x250);
-		lblLogoProjeto.setBounds(85, 25, 200, 173);
-		add(lblLogoProjeto);
+    public TelaLogin(){
+        super("mySeries - Login", 495, 300);
+        adicionarLabels();
+        adicionarTextFields();
+        adicionarButtons();
+        adicionarSeparador();
+        adicionarIcon();
+        setVisible(true);
+    }
 
-//		JLabel lblUser = new Icone(Imagens.USER_25x25, 30, 225, 35, 35);
-//		add(lblUser);
-//
-//		JLabel lblLock = new Icone(Imagens.LOCK_25x25, 30, 300, 35, 35);
-//		add(lblLock);
-	}
+    private void adicionarIcon(){
+        JLabel lblLogo = new JLabel(Imagens.LOGO_MY_SERIES_250x250);
+        lblLogo.setBounds(0, 80, 120, 120);
+        add(lblLogo);
+    }
 
-	private void adicionarLabels() {
-		JLabel lblLogin = new JLabelPadrao("Login:", 20, 160, 100, 100);
-		add(lblLogin);
+    private void adicionarLabels(){
+        JLabelPadraoTitulo lblTitulo = new JLabelPadraoTitulo("LOGIN", 270, 30, 60, 28);
 
-		JLabel lblSenha = new JLabelPadrao("Senha:", 23, 235, 100, 100);
-		add(lblSenha);
+        JLabelPadrao lblEmail = new JLabelPadrao("Email: ", 170, 110, 50, 19);
+        JLabelPadrao lblSenha = new JLabelPadrao("Senha: ", 170, 160, 50, 19);
 
-		JLabel lblEsqueceuASenha = new JLabelPadrao("Esqueceu a senha?", 120, 350, 140, 20);
-		
-		lblEsqueceuASenha.setForeground(new Color(42, 133, 175));
-		
-		lblEsqueceuASenha.addMouseListener(new MouseListener() {
+        add(lblTitulo);
+        add(lblEmail);
+        add(lblSenha);
+
+    }
+
+    private void adicionarTextFields(){
+        txtEmail = new JTextFieldPadrao(220, 110, 160, 22);
+
+        txtSenha = new JPasswordField();
+        txtSenha.setBounds(220, 160, 160, 22);
+
+        add(txtEmail);
+        add(txtSenha);
+    }
+
+
+    private void adicionarButtons(){
+        btnEntrar = new JButtonPadrao("Entrar", 320, 220, 75, 22);
+
+        btnEntrar.addActionListener(new ActionListener() {
 			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				
-				
-			}
 			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setCursor(new Cursor(HAND_CURSOR));
-				JOptionPane.showMessageDialog(null, "Oops! Essa parte ainda não foi desenvolvida!", "Aviso!", JOptionPane.WARNING_MESSAGE);
-				
-			}
-		});
-		add(lblEsqueceuASenha);
-	}
-
-	private void adicionarInputs() {
-		txtLogin = new JTextFieldPadrao(50, 225, 305, 36);
-		txtLogin.setToolTipText("Digite seu e-mail aqui");
-		add(txtLogin);
-
-		txtSenha = new JPasswordField();
-		txtSenha.setBounds(50, 300, 305, 36);
-		txtSenha.setToolTipText("Digite sua senha aqui");
-		txtSenha.setHorizontalAlignment(JTextField.CENTER);
-		add(txtSenha);
-	}
-
-	private void adicionarButtons() {
-		JButton btnEntrar = new JButtonPadrao("Entrar", 30, 385, 160, 40);
-
-		btnEntrar.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+				if(txtEmail.getText().isEmpty() || txtSenha.getPassword().length == 0) {
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+				} 
 				try {
-					new TelaHome();
+					if(central.autenticarUsuario(txtEmail.getText(), new String(txtSenha.getPassword())) != null) {
+						new TelaHome();
+						dispose();
+					}
 					
-				} catch(Exception erro) {
-					erro.printStackTrace();
+;				} catch(Exception erro) {
+					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.ERROR_MESSAGE);
 				}
-				
-
 			}
 		});
-		add(btnEntrar);
 
-		JButton btnNovaConta = new JButtonPadrao("Criar conta", 210, 385, 160, 40);
-		btnNovaConta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new TelaCadastro();
+        btnCriarConta = new JButtonPadrao("Cadastrar", 170, 220, 85, 22);
+        add(btnEntrar);
+        
+        
+        btnCriarConta.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+				new TelaCadastroUsuario();
 				dispose();
 			}
-		});
-		btnNovaConta.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		add(btnNovaConta);
-	}
+        });
 
-	
+        
+        add(btnCriarConta);
 
+    }
+
+    private void adicionarSeparador(){
+        separador = new JSeparator(SwingConstants.VERTICAL);
+        separador.setBounds(120, 0, 20, 300);
+        add(separador);
+    }
+
+
+
+
+
+    
 }

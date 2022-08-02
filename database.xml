@@ -1,76 +1,14 @@
 <persistencia.CentralDeInformacoes>
   <todosOsUsuarios>
     <classes.Usuario>
-      <nome>Diogo Marcelo</nome>
-      <CPF>103.000.000-00</CPF>
-      <telefone>(83) 9.9558-4645</telefone>
+      <nome>Diogo</nome>
+      <telefone>(83) 99658-6204</telefone>
       <idade>24</idade>
       <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
       <email>diogo@gmail.com</email>
       <senha>teste123</senha>
     </classes.Usuario>
-    <classes.Usuario>
-      <nome>Joao</nome>
-      <CPF>103.955.484-44</CPF>
-      <telefone>(83) 9.9584-5121</telefone>
-      <idade>24</idade>
-      <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>joao@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
-    <classes.Usuario>
-      <nome>Rodrigo</nome>
-      <CPF>456.456.789-46</CPF>
-      <telefone>(83) 9.5847-4856</telefone>
-      <idade>24</idade>
-      <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>rodrigo@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
-    <classes.Usuario>
-      <nome>tulio@gmail.com</nome>
-      <CPF>654.987.516-14</CPF>
-      <telefone>(85) 1.3218-6456</telefone>
-      <idade>24</idade>
-      <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>tulio@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
-    <classes.Usuario>
-      <nome>Lucas</nome>
-      <CPF>564.949.456-44</CPF>
-      <telefone>(94) 7.8945-6456</telefone>
-      <idade>24</idade>
-      <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>galego@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
-    <classes.Usuario>
-      <nome>Diogo</nome>
-      <CPF>103.800.364-44</CPF>
-      <telefone>(86) 5.6465-4564</telefone>
-      <idade>24</idade>
-      <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>marcelo@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
-    <classes.Usuario>
-      <nome>Cleyton</nome>
-      <CPF>564.613.546-45</CPF>
-      <telefone>(45) 6.4651-6516</telefone>
-      <idade>35</idade>
-      <dataDeNascimento>1987-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>cleyton@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
-    <classes.Usuario>
-      <nome>Joao</nome>
-      <CPF>654.654.613-21</CPF>
-      <telefone>(83) 8.4941-6546</telefone>
-      <idade>24</idade>
-      <dataDeNascimento>1998-07-17 03:00:00.0 UTC</dataDeNascimento>
-      <email>kbssa@gmail.com</email>
-      <senha>teste123</senha>
-    </classes.Usuario>
   </todosOsUsuarios>
+  <todosOsProgramas/>
+  <todosOsCanais/>
 </persistencia.CentralDeInformacoes>

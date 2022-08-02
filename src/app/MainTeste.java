@@ -4,13 +4,11 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
-import views.TelaCadastroCanal;
-import views.TelaHome;
-import views.TelaLogin;
+import views.Programa.TelaCadastroPrograma;
 
 public class MainTeste {
 	public static void main(String[] args) throws Exception {
-
+		
 		try {
 
 			UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -19,6 +17,7 @@ public class MainTeste {
 			System.err.println("Failed to initialize LaF");
 		}
 	
-		new TelaCadastroCanal();
+		new TelaCadastroPrograma();
+
 	}
 }

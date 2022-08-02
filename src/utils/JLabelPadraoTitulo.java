@@ -8,11 +8,11 @@ import javax.swing.JLabel;
 public class JLabelPadraoTitulo extends JLabel{
 	
 	
-	public JLabelPadraoTitulo(String nome, int largura, int altura, int x, int y) {
+	public JLabelPadraoTitulo(String nome, int x, int y, int largura, int altura) {
 		super(nome);
-		setBounds(largura, altura, x, y);
+		setBounds(x, y, largura, altura);
 		setHorizontalAlignment(JLabel.CENTER);
-		setFont(new Font("Poppins", Font.BOLD, 18));
+		setFont(new Font("Poppins", Font.BOLD, 14));
 		setBackground(Color.BLACK);
 	}
 	

@@ -8,8 +8,8 @@ public class Mensageiro {
 
 	private static String remetente = "myseriespoo@gmail.com";
 	private static String senha = "pooifpb2022";
-	private static String assunto = "Programação do dia";
-	private static String mensagem = "Olá, você recebeu essa mensagem porque solicitou as informações da programação do dia de hoje. Confira abaixo: ";
+	private static String assunto = "Programaï¿½ï¿½o do dia";
+	private static String mensagem = "OlÃ¡, vocÃª recebeu essa mensagem porque solicitou as informaÃ§Ãµes da programaÃ§Ã£o do dia de hoje. Confira abaixo: ";
 	
 	
 	public static String enviarProgramacaoDeHoje(String destinatario) throws Exception {

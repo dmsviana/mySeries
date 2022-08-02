@@ -5,16 +5,16 @@ import java.util.Date;
 
 public class Usuario {
 	private String nome;
-	private String CPF;
 	private String telefone;
 	private int idade;
 	private Date dataDeNascimento;
 	private String email;
 	private String senha;
 	
-	public Usuario(String nome, String CPF, String telefone, Date dataDeNascimento, String email, String senha) {
+	// Construtor
+	public Usuario(String nome, String telefone, Date dataDeNascimento, String email, String senha) {
 		this.nome = nome;
-		this.CPF = CPF;
+		
 		this.telefone = telefone;
 		this.dataDeNascimento = dataDeNascimento;
 		this.setIdade(dataDeNascimento);
@@ -22,18 +22,18 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
+	// Setters
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
-	}
+	
 	
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	
+	// Tratar dia e mês
 	public void setIdade(Date dataDeNascimento) {
 		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 		Date dataAtual = new Date();
@@ -53,13 +53,12 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
+	// Getters
 	public String getNome() {
 		return nome;
 	}
 	
-	public String getCPF() {
-		return CPF;
-	}
+	
 	
 	public String getTelefone() {
 		return telefone;
@@ -81,7 +80,8 @@ public class Usuario {
 		return senha;
 	}
 
+	// Sobreescritas
 	public String toString() {
-		return "Nome: " + this.nome +"\nCPF: " + this.CPF + "\nTelefone: " + this.telefone + "\nIdade: "+ this.idade + "\nE-mail: " + this.email;
+		return "Nome: " + this.nome +"\nTelefone: " + this.telefone + "\nIdade: "+ this.idade + "\nE-mail: " + this.email;
 	}
 }

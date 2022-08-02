@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import classes.Canal;
 import classes.ProgramaDeTV;
 import classes.Usuario;
+import excecoes.CanalJaExisteException;
+import excecoes.UsuarioJaExisteException;
 
 public class CentralDeInformacoes {
 	private ArrayList<Usuario> todosOsUsuarios = new ArrayList<Usuario>();
@@ -28,35 +30,44 @@ public class CentralDeInformacoes {
 	}
 	
 
-	public void adicionarUsuario(Usuario usuario) throws Exception {
+	public void adicionarUsuario(Usuario usuario) throws UsuarioJaExisteException{
 		if(!todosOsUsuarios.isEmpty()) {
 			for(Usuario u : todosOsUsuarios) {
-				if(u.getCPF().equals(usuario.getCPF())) {
-					throw new Exception("Usuário já existe!");
-				} else if(u.getEmail().equals(usuario.getEmail())) {
-					throw new Exception("E-mail já cadastrado!");
-				} 
+				if(u.getEmail().equalsIgnoreCase(usuario.getEmail())) {
+					throw new UsuarioJaExisteException();
+				}
 			}
 		}
 		todosOsUsuarios.add(usuario);
 	}
 	
 	
-	public boolean adicionarCanal(Canal canal) {
+	public void adicionarCanal(Canal canal) throws CanalJaExisteException{
 		if(recuperarCanalPeloNome(canal.getNomeDoCanal()) == null) {
 			todosOsCanais.add(canal);
-			return true;
+			
+		} else {
+			throw new CanalJaExisteException();
 		}
-		return false;
 	}
 	
 	public Canal recuperarCanalPeloNome(String nomeDoCanal) {
-		for(int i = 0; i < todosOsCanais.size(); i++) {
-			if(todosOsCanais.get(i).equals(nomeDoCanal)) {
-				return todosOsCanais.get(i);
+		for(Canal canalCadastrado : todosOsCanais) {
+			if(canalCadastrado.getNomeDoCanal().equalsIgnoreCase(nomeDoCanal)) {
+				return canalCadastrado;
 			}
 		}
 		return null;
+	}
+	
+	public boolean deletarCanal(long id) {
+		for(Canal canal : todosOsCanais) {
+			if(canal.getId() == id) {
+				todosOsCanais.remove(canal);
+				return true;				
+			}
+		}
+		return false;
 	}
 
 	public boolean adicionarPrograma(ProgramaDeTV programa) {
@@ -77,18 +88,8 @@ public class CentralDeInformacoes {
 		return null;
 	}
 	
-	public String listarProgramasDeTipoIguais(String tipo) {
-		ArrayList<String> nomeDosProgramas = new ArrayList<String>();;
-		for(int i = 0; i < todosOsProgramas.size(); i++) {
-			if(todosOsProgramas.get(i).getTipoDePrograma().getDescricao().equals(tipo)) {
-				nomeDosProgramas.add(todosOsProgramas.get(i).getNome());
-			}
-		}
-		return nomeDosProgramas.toString();
-			
-			
-		
-	}
+
+	
 	
 	public Usuario autenticarUsuario(String email, String senha) throws Exception {
 		for(Usuario usuario : todosOsUsuarios) {
@@ -99,28 +100,5 @@ public class CentralDeInformacoes {
 		throw new Exception("Email ou senha incorretos!");
 	}
 	
-	public Usuario autenticarEmailDoUsuario(String email) throws Exception {
-		for(Usuario usuario : todosOsUsuarios) {
-			if(usuario.getEmail().equals(email)) {
-				return usuario;
-			}
-		}
-		throw new Exception("O usuário não existe!");
-	}
-	
-	public boolean validarEmail(String email) {
-		boolean emailValido = false;
-		
-		if(email != null && email.length() > 0) {
-			String caracteresValidos = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-			Pattern pattern = Pattern.compile(caracteresValidos, Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(email);
-			
-			if(matcher.matches()) {
-				emailValido = true;
-			}
-		}
-		return emailValido;
-	}
 
 }

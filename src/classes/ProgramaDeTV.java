@@ -2,20 +2,20 @@ package classes;
 
 import java.time.DayOfWeek;
 
+import enums.FaixaEtaria;
 import enums.TipoDePrograma;
 
-public class ProgramaDeTV {
+public abstract class ProgramaDeTV {
 	private long id;
 	private String nome;
-	private TipoDePrograma tipoDePrograma;
-	private DayOfWeek diasDaSemana;
+	private DayOfWeek[] diasDaSemana;
+	private FaixaEtaria faixaEtaria;
 	private Canal canal;
 
-	public ProgramaDeTV(String nome, TipoDePrograma tipoDePrograma, DayOfWeek diasDaSemana, Canal canal) {
+	public ProgramaDeTV(String nome, DayOfWeek[] diasDaSemana, Canal canal) {
 		this.id = System.currentTimeMillis();
 		this.nome = nome;
-		this.tipoDePrograma = tipoDePrograma;
-		this.diasDaSemana = diasDaSemana;
+		this.diasDaSemana = new DayOfWeek[6];
 		this.canal = canal;
 	}
 
@@ -27,19 +27,11 @@ public class ProgramaDeTV {
 		this.nome = nome;
 	}
 
-	public TipoDePrograma getTipoDePrograma() {
-		return tipoDePrograma;
-	}
-
-	public void setTipoDePrograma(TipoDePrograma tipoDePrograma) {
-		this.tipoDePrograma = tipoDePrograma;
-	}
-
-	public DayOfWeek getDiasDaSemana() {
+	public DayOfWeek[] getDiasDaSemana() {
 		return diasDaSemana;
 	}
 
-	public void setDiasDaSemana(DayOfWeek diasDaSemana) {
+	public void setDiasDaSemana(DayOfWeek[] diasDaSemana) {
 		this.diasDaSemana = diasDaSemana;
 	}
 
@@ -59,9 +51,17 @@ public class ProgramaDeTV {
 		this.id = id;
 	}
 
+
+	public FaixaEtaria getFaixaEtaria() {
+		return faixaEtaria;
+	}
+
+	public void setFaixaEtaria(FaixaEtaria faixaEtaria) {
+		this.faixaEtaria = faixaEtaria;
+	}
+
 	public String toString() {
 		return "Nome do programa: " + nome;
 	}
-
 
 }
